@@ -1,0 +1,39 @@
+name: debug
+use_wandb: False
+
+path:
+  root: /groups1/gaa50131/datasets/ActivityNet
+  feature: features/resnet
+  annotation: captions
+  output: ../../out
+  submission_file: submission.json
+
+hyperparam:
+  attention: True
+  tokenizer:
+    min_freq: 5
+    max_len: 100
+  optimization:
+    name: Adam
+    lr: 0.0001
+    beta1: 0.9
+    beta2: 0.999
+    weight_decay: 0.
+  loss_weight:
+    XELoss: 1.
+  transformer:
+    feature_dim: 2048
+    input_seqlen: 200
+    input_dim: 768
+    n_head: 12
+    n_layer: 12
+    dropout_prob: 0.5
+    scheduled_sampling_prob: 0
+  misc:
+    max_epoch: 20
+    num_worker: 32
+    gpu_ids: [0, 1, 2, 3]
+    batch_size: 64
+    val_samples: 1000
+    # set to 0 if making nondeterministic
+    random_seed: 0
